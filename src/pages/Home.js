@@ -1,5 +1,11 @@
+import PageContent from '../components/PageContent';
+
 const Home = () => {
-  return <p>This is home page</p>;
+  return (
+    <PageContent title="Welcome!">
+      <p>Browse all out amazing events!</p>
+    </PageContent>
+  );
 };
 
 export default Home;

@@ -9,6 +9,7 @@ const Root = () => {
     <Fragment>
       <MainNavigation />
       {navigation.state === 'loading' && <p>Loading...</p>}
+      {navigation.state === 'submitting' && <p>Submitting...</p>}
       <Outlet />
     </Fragment>
   );

@@ -1,10 +1,10 @@
 import { useRouteError } from 'react-router-dom';
 
-import PageContent from './PageContent';
+import PageContent from '../components/PageContent';
 
 const Root = () => {
   const error = useRouteError();
-  console.log(error);
+  // console.log(error);
 
   return (
     <PageContent title={`${error.status ? error.status : ''} error occured!"`}>

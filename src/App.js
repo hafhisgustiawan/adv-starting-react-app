@@ -1,11 +1,18 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
 import Root from './pages/Root';
 import Home from './pages/Home';
-import Event, { eventLoader } from './pages/Events';
+import Events, { eventLoader } from './pages/Events';
 import Error from './pages/Error';
-import EventDetail from './pages/EventDetail';
+import EventDetail, {
+  loader as eventDetailLoader,
+  action as deleteEventAction,
+} from './pages/EventDetail';
 import NewEvent from './pages/NewEvent';
 import EventsRoot from './pages/EventsRoot';
+import EditEvent from './pages/EditEvent';
+import { action as eventFormAction } from './components/EventForm';
+import NewsletterPage, { action as newsletterAction } from './pages/Newsletter';
 
 const router = createBrowserRouter([
   {
@@ -20,7 +27,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Event />,
+            element: <Events />,
             loader: eventLoader,
             // loader: async () => {
             //   // dont worry about this async function which return promise, react router will handle it in result component or pages
@@ -34,10 +41,26 @@ const router = createBrowserRouter([
             //   }
             // },
           },
-          { path: 'new', element: <NewEvent /> },
-          { path: ':id', element: <EventDetail /> },
-          { path: ':id/edit', element: <EventDetail /> },
+          {
+            path: ':id',
+            id: 'event-detail',
+            loader: eventDetailLoader,
+            children: [
+              {
+                index: true,
+                element: <EventDetail />,
+                action: deleteEventAction,
+              },
+              { path: 'edit', element: <EditEvent />, action: eventFormAction },
+            ],
+          },
+          { path: 'new', element: <NewEvent />, action: eventFormAction },
         ],
+      },
+      {
+        path: 'newsletter',
+        element: <NewsletterPage />,
+        action: newsletterAction,
       },
     ],
   },
