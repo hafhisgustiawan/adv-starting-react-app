@@ -13,7 +13,7 @@ function EventForm({ method, event }) {
   const navigate = useNavigate();
   const navigation = useNavigation();
 
-  //give us to the closest action and give us return data from that action
+  //give us this return action route or the closest action and give us return data from that action
   const data = useActionData();
 
   const isSubmitting = navigation.state === 'submitting';
